@@ -1,10 +1,12 @@
 
+var alien
 
+function preload() {
+  alien = loadAnimation('./doodleman.png')
+}
 function setup() {
   // put setup code here
   createCanvas(500,1000)
-  var alien = createSprite(200,200);
-  alien.setImage("./doodleman.png");
 }
 
 function draw() {
