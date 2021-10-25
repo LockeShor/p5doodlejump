@@ -7,10 +7,6 @@ function setup() {
   alien.setImage("./doodleman.png");
 }
 
-function preload(){
-  loadAnimation(alien);
-}
-
 function draw() {
   // put drawing code here
   fill("black");
