@@ -5,5 +5,6 @@ function setup() {
 
 function draw() {
   // put drawing code here
+  fill("black")
   rect(200,200,50,50)
 }
