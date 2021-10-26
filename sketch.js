@@ -16,14 +16,15 @@ function setup() {
 }
 
 function draw() {
-
+  //background
   background("white");
   fill("black");
   strokeWeight(1);
 
+  //bouncing
   if (alien.position.y > barrier){
     alien.velocity.y = -15;
-    
+    // alien.position.y = barrier
   }
   else {
     alien.velocity.y += 1.1;
@@ -54,7 +55,7 @@ function draw() {
     alien.position.x = 0;
   }
   //drawing
-  console.log("alien vel x: " + alien.velocity.x)
+console.log("alien vel x: " + alien.velocity.x)
   drawSprites();
   noFill();
   strokeWeight(10);
