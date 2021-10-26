@@ -94,7 +94,6 @@ function draw() {
       }
     })
 
-    console.log("platinstance")
   }
 
 
