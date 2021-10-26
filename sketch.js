@@ -1,48 +1,68 @@
 
 var alien;
-var img;
-var dx = 200, dy = 0;
 var grav = 4;
 var spaceDown = false;
 var barrier = 850;
 function setup() {
-  // put setup code here
-  createCanvas(500,1000)
+    // put setup code here
+    createCanvas(500,1000)
 
-  img = loadImage('doodleman.png')
+    var img = loadImage('doodleman.png')
+  
+    alien = createSprite(200,200)
+    alien.addImage(img)
 
-  // alien = createsprite(200,200)
-  //alien.addImage(img)
+    alien.limitSpeed(10)
 }
 
 function draw() {
-  if(grav < 30){
-    grav = grav * 1.1;
-  }
-  background("white")
-  fill("black");
 
-  if (dy > barrier) {
-    dy -= 50;
-    grav = 4;
+  background("white");
+  fill("black");
+  strokeWeight(1);
+
+  if (alien.position.y > barrier){
+    alien.velocity.y = -15;
+    
   }
-  if(dy < 900){
-     dy = dy + grav;
-  }
-  else{
-    dy = 900;
+  else {
+    alien.velocity.y += 1.1;
   }
   
-
-  image(img, dx - 25,dy - 25, 100,100)
-  //drawSprites();
-  console.log("dy: " + dy)
+  //Movement
+  if (keyDown("left") && alien.velocity.x > -10){
+    alien.velocity.x -= 1;
+    alien.mirrorX(1)
+  }
+  else if (keyDown("right") && alien.velocity.x < 10){
+    alien.velocity.x += 1;
+    alien.mirrorX(-1)
+  }
+  else {
+      if(alien.velocity.x > 0) {
+        alien.velocity.x -= 0.25;
+      }
+      if(alien.velocity.x < 0) {
+        alien.velocity.x += 0.25;
+      }
+  }
+  //infinite movement
+  if(alien.position.x < 0){
+    alien.position.x = 500;
+  }
+  if(alien.position.x > 500){
+    alien.position.x = 0;
+  }
+  //drawing
+  console.log("alien vel x: " + alien.velocity.x)
+  drawSprites();
+  noFill();
+  strokeWeight(10);
+  rect(0,0,500,1000);
 }
 
-function keyTyped() {
-  if (key === 'a') {
+function keyPressed(){
+  if (key === ' ') {
     spaceDown = true;
   }
-  // uncomment to prevent any default behavior
-  return false;
 }
