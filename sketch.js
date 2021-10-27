@@ -1,9 +1,9 @@
 
 var alien;
 var plat;
-var grav = 4;
-var spaceDown = false;
-var barrier = 850;
+var platop = false;
+
+var jumpfactor = 22;
 
 var theme = "default";
 
@@ -17,11 +17,10 @@ function setup() {
     alien = createSprite(200,200)
     alien.addImage(doodlemanImg)
 
-
     plats = new Group();
 
-    randomNum = parseInt(Math.floor(Math.random() * 400))
-    plat = createSprite(randomNum + 50, 0)
+    randomNum = parseInt(Math.floor(Math.random() * 500))
+    plat = createSprite(randomNum, 0)
     plat.addImage(platformImg)
     plats.add(plat)
 }
@@ -29,9 +28,9 @@ var countdown = 50;
 function draw() {
   countdown--
   if(countdown <= 0){
-    var platformImg = loadImage('/themes/'+theme+'/platform.png')
-    randomNum = parseInt(Math.floor(Math.random() * 400))
-    newplat = createSprite(randomNum + 50, 0)
+    var platformImg = loadImage(`themes/${theme}/platform.png`)
+    randomNum = parseInt(Math.floor(Math.random() * 500))
+    newplat = createSprite(randomNum, 0)
     newplat.addImage(platformImg)
     newplat.setCollider("rectangle", -10, 5, 20, 1)
     plats.add(newplat)
@@ -50,11 +49,11 @@ function draw() {
     alien.position.y = 200;
     text("YOU LOST",50,50);
   }
-  // else if (alien.position.y > barrier){
-  //   alien.velocity.y = -15;
-  // }
-  else {
+  else if (alien.velocity.y < 50) {
     alien.velocity.y += 1.1;
+  }
+  else{
+    alien.velocity.y = 49;
   }
   
   //Movement
@@ -87,27 +86,22 @@ function draw() {
     platinstance = plats.get(i);
     platinstance.velocity.y = 3;
       //platform collision
-    alien.collide(platinstance, function(){
-      alien.velocity.y = -20;
-      if(platinstance.position.y <= alien.position.y){
-        alien.position.y = platinstance.position.y + 5;
+
+      if(alien.position.x > platinstance.position.x-40 
+        && alien.position.x < platinstance.position.x+40
+        && alien.position.y > platinstance.position.y-50 
+        && alien.position.y < platinstance.position.y  ){
+          alien.velocity.y = -jumpfactor;
       }
-    })
+
 
   }
 
 
-
   //drawing
-  console.log(plats.size())
+  console.log(alien.velocity.y)
   drawSprites();
   noFill();
   strokeWeight(10);
   rect(0,0,500,1000);
-}
-
-function keyPressed(){
-  if (key === ' ') {
-    spaceDown = true;
-  }
 }
