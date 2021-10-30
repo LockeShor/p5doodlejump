@@ -3,7 +3,7 @@ var alien;
 var plat;
 var platop = false;
 
-var gravity = 0.5
+var gravity = 0.5;
 var jumpfactor = 15;
 
 var theme = "default";
@@ -13,8 +13,8 @@ function setup() {
     // put setup code here
     createCanvas(500,1000)
 
-    var doodlemanImg = loadImage('/themes/'+theme+'/doodleman.png')
-    var platformImg = loadImage('/themes/'+theme+'/platform.png')
+    var doodlemanImg = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/doodleman.png')
+    var platformImg = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/platform.png')
 
     alien = createSprite(200,200)
     alien.addImage(doodlemanImg)
