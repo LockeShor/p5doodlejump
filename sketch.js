@@ -14,9 +14,11 @@ function setup() {
     createCanvas(500,1000);
 
     var doodlemanImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/doodleman.png')
+    var doodlemanJumpImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/doodlemanjump.png')
     var platformImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/platform.png')
 
     var doodlemanImg = doodlemanImgRaw;
+    var doodlemanJumpImg = doodlemanJumpImgRaw;
     var platformImg = platformImgRaw;
 
     alien = createSprite(200,200);
@@ -38,7 +40,6 @@ function draw() {
     randomNum = parseInt(Math.floor(Math.random() * 500))
     newplat = createSprite(randomNum, 0)
     newplat.addImage(platformImg)
-    newplat.setCollider("rectangle", -10, 5, 20, 1)
     plats.add(newplat)
 
     countdown = Math.floor(Math.random()*20) + 40
@@ -75,8 +76,11 @@ function draw() {
       if(alien.velocity.x > 0) {
         alien.velocity.x -= 0.35;
       }
-      if(alien.velocity.x < 0) {
+      else if(alien.velocity.x < 0) {
         alien.velocity.x += 0.35;
+      }
+      else {
+        alien.velocity.x = 0;
       }
   }
   //infinite movement
@@ -104,6 +108,10 @@ function draw() {
       alien.overlap(platinstance, function(){
         if(alien.velocity.y > 0){
             alien.velocity.y = -jumpfactor;
+            alien.addImage(doodlemanJumpImg);
+            setTimeout(function(){
+              alien.addImage(doodlemanImg);
+            })
         }
       })
 
