@@ -3,9 +3,11 @@ var alien;
 var plat;
 var platop = false;
 
-var jumpfactor = 22;
+var gravity = 0.5
+var jumpfactor = 15;
 
 var theme = "default";
+
 
 function setup() {
     // put setup code here
@@ -47,30 +49,30 @@ function draw() {
   if(alien.position.y > 1000){
     alien.velocity.y = 0;
     alien.position.y = 200;
-    text("YOU LOST",50,50);
   }
   else if (alien.velocity.y < 50) {
-    alien.velocity.y += 1.1;
+    alien.velocity.y += gravity;
   }
   else{
     alien.velocity.y = 49;
   }
   
   //Movement
+  var moveStrength = 2;
   if (keyDown("left") && alien.velocity.x > -10){
-    alien.velocity.x -= 3;
+    alien.velocity.x -= moveStrength;
     alien.mirrorX(1)
   }
   else if (keyDown("right") && alien.velocity.x < 10){
-    alien.velocity.x += 3;
+    alien.velocity.x += moveStrength;
     alien.mirrorX(-1)
   }
   else {
       if(alien.velocity.x > 0) {
-        alien.velocity.x -= 0.25;
+        alien.velocity.x -= 0.35;
       }
       if(alien.velocity.x < 0) {
-        alien.velocity.x += 0.25;
+        alien.velocity.x += 0.35;
       }
   }
   //infinite movement
@@ -87,19 +89,26 @@ function draw() {
     platinstance.velocity.y = 3;
       //platform collision
 
-      if(alien.position.x > platinstance.position.x-40 
-        && alien.position.x < platinstance.position.x+40
-        && alien.position.y > platinstance.position.y-50 
-        && alien.position.y < platinstance.position.y  ){
-          alien.velocity.y = -jumpfactor;
-      }
+      // if(alien.position.x > platinstance.position.x-40 
+      //   && alien.position.x < platinstance.position.x+40
+      //   && alien.position.y > platinstance.position.y-50 
+      //   && alien.position.y < platinstance.position.y  
+      //   && alien.velocity.y > 0){
+      //     alien.velocity.y = -jumpfactor;
+      // }
+
+      alien.overlap(platinstance, function(){
+        if(alien.velocity.y > 0){
+            alien.velocity.y = -jumpfactor;
+        }
+      })
 
 
   }
-
+  //collision
+  
 
   //drawing
-  console.log(alien.velocity.y)
   drawSprites();
   noFill();
   strokeWeight(10);
