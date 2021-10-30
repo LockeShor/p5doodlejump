@@ -14,11 +14,9 @@ function setup() {
     createCanvas(500,1000);
 
     var doodlemanImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/doodleman.png')
-    var doodlemanJumpImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/doodlemanjump.png')
     var platformImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/platform.png')
 
     var doodlemanImg = doodlemanImgRaw;
-    var doodlemanJumpImg = doodlemanJumpImgRaw;
     var platformImg = platformImgRaw;
 
     alien = createSprite(200,200);
@@ -108,10 +106,13 @@ function draw() {
       alien.overlap(platinstance, function(){
         if(alien.velocity.y > 0){
             alien.velocity.y = -jumpfactor;
+            var doodlemanJumpImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/doodlemanjump.png');
+            var doodlemanJumpImg = doodlemanJumpImgRaw;
             alien.addImage(doodlemanJumpImg);
             setTimeout(function(){
-              alien.addImage(doodlemanImg);
-            })
+              var doodlemanImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/doodleman.png')
+              alien.addImage(doodlemanImgRaw);
+            },500)
         }
       })
 
