@@ -11,33 +11,37 @@ var theme = "default";
 
 function setup() {
     // put setup code here
-    createCanvas(500,1000)
+    createCanvas(500,1000);
 
-    var doodlemanImg = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/doodleman.png')
-    var platformImg = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/platform.png')
+    var doodlemanImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/doodleman.png')
+    var platformImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/platform.png')
 
-    alien = createSprite(200,200)
-    alien.addImage(doodlemanImg)
+    var doodlemanImg = doodlemanImgRaw;
+    var platformImg = platformImgRaw;
+
+    alien = createSprite(200,200);
+    alien.addImage(doodlemanImg);
 
     plats = new Group();
 
-    randomNum = parseInt(Math.floor(Math.random() * 500))
-    plat = createSprite(randomNum, 0)
-    plat.addImage(platformImg)
-    plats.add(plat)
+    randomNum = parseInt(Math.floor(Math.random() * 500));
+    plat = createSprite(randomNum, 0);
+    plat.addImage(platformImg);
+    plats.add(plat);
 }
 var countdown = 50;
 function draw() {
   countdown--
   if(countdown <= 0){
-    var platformImg = loadImage(`themes/${theme}/platform.png`)
+    var platformImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/platform.png');
+    var platformImg = platformImgRaw;
     randomNum = parseInt(Math.floor(Math.random() * 500))
     newplat = createSprite(randomNum, 0)
     newplat.addImage(platformImg)
     newplat.setCollider("rectangle", -10, 5, 20, 1)
     plats.add(newplat)
 
-    countdown = 50
+    countdown = Math.floor(Math.random()*20) + 40
   }
   //background
   background("white");
