@@ -109,12 +109,10 @@ function draw() {
             var doodlemanJumpImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/doodlemanjump.png');
             var doodlemanJumpImg = doodlemanJumpImgRaw;
             alien.addImage(doodlemanJumpImg);
-            alien.scale = 2;
             setTimeout(function(){
               var doodlemanImgRaw = loadImage('https://raw.githubusercontent.com/Redpug111/p5doodlejump/main/themes/'+theme+'/doodleman.png')
               alien.addImage(doodlemanImgRaw);
-            },500)
-          alien.scale = 1;
+            },100)
         }
       })
 
